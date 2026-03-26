@@ -18,13 +18,16 @@ public class Produto {
 
     private String sku;
 
+    private Integer quantidade;
+
     public Produto() {
     }
 
-    public Produto(Long id, String nome, String sku) {
+    public Produto(Long id, String nome, String sku, Integer quantidade) {
         this.id = id;
         this.nome = nome;
         this.sku = sku;
+        this.quantidade = quantidade;
     }
 
     public Long getId() {
@@ -49,5 +52,13 @@ public class Produto {
 
     public void setSku(String sku) {
         this.sku = sku;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 }

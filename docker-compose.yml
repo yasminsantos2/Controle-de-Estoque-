@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres_estoque
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: estoquedb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata_estoque:/var/lib/postgresql/data
+    networks:
+      - estoque_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_estoque
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: 123
+    ports:
+      - "5050:80"
+    networks:
+      - estoque_network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+networks:
+  estoque_network:
+    driver: bridge
+
+volumes:
+  pgdata_estoque:

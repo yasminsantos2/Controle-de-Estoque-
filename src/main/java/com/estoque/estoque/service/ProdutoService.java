@@ -38,6 +38,7 @@ public class ProdutoService {
         return produtoRepository.findById(id).map(produto -> {
             produto.setNome(produtoAtualizado.getNome());
             produto.setSku(produtoAtualizado.getSku());
+            produto.setQuantidade(produtoAtualizado.getQuantidade());
             return produtoRepository.save(produto);
         });
     }
