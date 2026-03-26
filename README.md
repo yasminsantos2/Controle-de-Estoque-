@@ -76,15 +76,4 @@ Interagindo pelo amigável painel do **Swagger**, eis a base de operações CRUD
 - `PUT /produtos/{id}` - Atualiza dados de um registro existente.
 - `DELETE /produtos/{id}` - Exclui o produto selecionado do banco de dados.
 
----
 
-## 🤝 Como Contribuir
-
-1. Faça um **Fork** do projeto.
-2. Crie uma nova branch com a sua feature: `git checkout -b feature/minha-feature`.
-3. Salve as marcações (**commit**): `git commit -m 'feat: Minha nova feature incrível'`.
-4. Faça o upload das suas alterações para o fork remoto (**push**): `git push origin feature/minha-feature`.
-5. Abra o seu **Pull Request** para aprovação!
-
-### 📄 Licença
-Distribuído sob a licença MIT. Sinta-se à vontade para copiar e testar da maneira que quiser!
