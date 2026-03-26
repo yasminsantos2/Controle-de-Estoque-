@@ -55,7 +55,7 @@ Como o projeto integra API local (porta 8083) com serviços do Docker, aqui est�
 | Serviço | Link / URL | Usuário Padrão | Senha Padrão |
 | --- | --- | --- | --- |
 | ⚡ **Swagger (Interface da API)** | [http://localhost:8083/swagger-ui/index.html](http://localhost:8083/swagger-ui/index.html) | - | - |
-| 🗄️ **Painel pgAdmin Web** | [http://localhost:5050](http://localhost:5050) | `admin@admin.com` | `123` |
+| 🗄️ **Painel pgAdmin Web** | [http://localhost:5050](http://localhost:5050) |
 
 Caso conecte algum app de terceiros (DBeaver, DataGrip) diretamente, utilize as seguintes credenciais internas do banco:
 - **Host**: `localhost` (para apps do Windows) ou `postgres` (se dentro do pgAadmin do Docker)
