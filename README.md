@@ -1,64 +1,90 @@
-<h1 align="center">📦 Sistema de Controle de Estoque</h1>
+<h1 align="center">📦 Sistema de Controle de Estoque Fullstack</h1>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" />
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
   <img src="https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=java&logoColor=white" />
   <img src="https://img.shields.io/badge/Spring_Boot-3.3.0-6DB33F?style=for-the-badge&logo=spring&logoColor=white" />
   <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" />
   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
-  <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" />
 </p>
 
-Uma API RESTful desenvolvida em **Java** e **Spring Boot** para o gerenciamento de inventário e produtos, operando com banco de dados **PostgreSQL** via Docker. Ideal para gerenciar níveis de estoque com estabilidade e facilidade.
+Uma aplicação Fullstack completa para gerenciamento de inventário. Composta por uma API RESTful em **Spring Boot (Java)**, um Frontend moderno e interativo em **Angular**, e armazenando estados num banco de dados relacional **PostgreSQL**, além de estar totalmente preparada para funcionar em contêineres Docker.
 
 ---
 
 ## 🚀 Tecnologias e Ferramentas Livres
+
+### Frontend
+- **Framework Ouro:** Angular 17+
+- **Linguagem:** TypeScript
+- **Estilização:** CSS Vanilla com _Glassmorphism_
+
+### Backend
 - **Linguagem:** Java 17
-- **Framework Ouro:** Spring Boot 3.3.0
+- **Framework:** Spring Boot 3.3.0
 - **Persistência de Dados:** Spring Data JPA + Hibernate
-- **Banco de Dados:** PostgreSQL 15 (Em ambiente Docker Isolado)
 - **Documentação de API:** Swagger / OpenAPI
-- **Gerenciador de Dependências:** Maven
+
+### Infraestrutura
+- **Banco de Dados:** PostgreSQL 15 
+- **DB Interface:** pgAdmin4
+- **Orquestração:** Docker & Docker Compose
 
 ---
 
-## 🛠️ Como preparar o ambiente?
+## 🛠️ Como preparar e rodar o projeto?
 
-### 1. Requisitos na sua máquina
-Para rodar este projeto, as únicas ferramentas exigidas no seu ambiente de desenvolvimento são:
-- [Java 17 JDK](https://adoptium.net/) instalado
-- Seu editor de código favorito (IntelliJ IDEA, Eclipse ou VSCode)
-- [Docker](https://www.docker.com/products/docker-desktop) rodando. 
+O projeto está totalmente configurado para rodar os 3 módulos (Banco, Backend e Frontend) de forma automatizada usando o Docker.
 
-### 2. Iniciar o Banco de Dados (PostgreSQL)
-Antes de iniciar a aplicação, você precisa levantar o contêiner do banco de dados e o painel administrativo. Pelo terminal (na pasta raiz onde o `docker-compose.yml` está), rode o seguinte comando:
+### Requisitos
+- [Docker e Docker Desktop](https://www.docker.com/products/docker-desktop) instalados (necessário que estejam abertos no momento do run).
+
+### ✅ Subindo todo o ecossistema pelo Docker (Recomendado)
+
+Abra o terminal na raiz do projeto (`C:\Controle-de-Estoque-\`) e digite:
 
 ```bash
-docker-compose up -d
+docker-compose up -d --build
 ```
-> Isso subirá imediatamente um *PostgreSQL* operando na porta **5432** e também a interface visual do banco (pgAdmin) na porta **5050**.
+> O Docker irá baixar o banco de dados, compilar seu código Spring Boot, fazer a build do Angular e colocar todos na mesma rede virtual interna de forma transparente.
 
-### 3. Rodar a Aplicação Spring
-Após confirmar que o Docker subiu as dependências em background:
-1. Abra o projeto na sua IDE favorita (**IntelliJ**, por exemplo).
-2. Aguarde a sincronização rápida do **Maven** baixar as bibliotecas necessárias.
-3. Pressione o botão `Run` na classe principal (ex: `EstoqueApplication`).
+---
 
-A aplicação irá inicializar e o framework **Hibernate** encarregará-se de criar ou atualizar automaticamente a tabela `produtos` no seu banco de dados Postgres!
+### 💻 Como focar no Desenvolvimento Local 
+
+Caso prefira rodar os serviços localmente pelos seus editores:
+
+**1. Apenas o Banco de Dados (Terminal):**
+Suba apenas o módulo do Postgres:
+```bash
+docker-compose up -d postgres
+```
+
+**2. Backend via IntelliJ IDEA:**
+Inicie a classe `EstoqueApplication.java` apertando em *Run* / *Play*. O Hibernate criará as tabelas sozinho na porta local **8083**.
+
+**3. Frontend via VS Code:**
+Abra a pasta `/frontend`. No terminal interno inicie o serviço de live-reload do Angular:
+```bash
+npm install --legacy-peer-deps
+npm start
+``` 
 
 ---
 
 ## 🔗 Links e Acessos Importantes
 
-Como o projeto integra API local (porta 8083) com serviços do Docker, aqui estão seus canais de acesso:
+Com o projeto completo rodando, você pode validar testando seus canais oficiais:
 
-| Serviço | Link / URL | Usuário Padrão | Senha Padrão |
-| --- | --- | --- | --- |
-| ⚡ **Swagger (Interface da API)** | [http://localhost:8083/swagger-ui/index.html](http://localhost:8083/swagger-ui/index.html) | - | - |
-| 🗄️ **Painel pgAdmin Web** | [http://localhost:5050](http://localhost:5050) | `admin@admin.com` | `123` |
+| Módulo/Serviço | Link / URL de Acesso | Usos |
+| --- | --- | --- |
+| 🌐 **Frontend (Página Web)** | [http://localhost:4200](http://localhost:4200) | Cadastrar e Ver saldo de estoque (UI Principal) |
+| ⚡ **Backend API (Swagger)** | [http://localhost:8083/swagger-ui/index.html](http://localhost:8083/swagger-ui/index.html) | Ver e debugar os endpoints |
+| 🗄️ **Painel BD (pgAdmin)** | [http://localhost:5050](http://localhost:5050) | Consultar as tabelas - Usuário: `admin@admin.com` - Senha: `123` |
 
-Caso conecte algum app de terceiros (DBeaver, DataGrip) diretamente, utilize as seguintes credenciais internas do banco:
-- **Host**: `localhost` (para apps do Windows) ou `postgres` (se dentro do pgAadmin do Docker)
+### Credenciais Internas do PostgreSQL
+- **Host**: `localhost` (ou `postgres_estoque` dentro da rede docker)
 - **Porta**: `5432`
 - **Database**: `estoquedb`
 - **Username**: `admin`
@@ -66,14 +92,12 @@ Caso conecte algum app de terceiros (DBeaver, DataGrip) diretamente, utilize as 
 
 ---
 
-## 📋 Endpoints Disponíveis da API
+## 📋 Arquitetura Rest API
 
-Interagindo pelo amigável painel do **Swagger**, eis a base de operações CRUD liberada (`/produtos`):
+Se decidir conectar sistemas de terceiros ou integrar num novo app móvel, a base de endpoints é limpa e unificada (`/produtos`):
 
-- `GET /produtos` - Retorna a lista integral de todos os produtos ativos no estoque.
-- `GET /produtos/{id}` - Busca e retorna propriedades de um item específico pelo ID primário.
-- `POST /produtos` - Cadastra um novo produto definindo **Nome, Quantidade e SKU**.
-- `PUT /produtos/{id}` - Atualiza dados de um registro existente.
-- `DELETE /produtos/{id}` - Exclui o produto selecionado do banco de dados.
-
-
+- `GET /produtos` - Retorna a lista integral de produtos cadastrados.
+- `GET /produtos/{id}` - Busca um único item pelo Identificador (ID).
+- `POST /produtos` - Cadastra novo produto no estoque (Payload pede: `nome`, `sku`, `quantidade`).
+- `PUT /produtos/{id}` - Modifica quantidade, nome ou Sku de um cadastro.
+- `DELETE /produtos/{id}` - Remove da tabela de registros.
