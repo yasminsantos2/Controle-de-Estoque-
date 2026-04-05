@@ -36,6 +36,37 @@ services:
       postgres:
         condition: service_healthy
 
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend_estoque
+    restart: unless-stopped
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/estoquedb
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=123
+    ports:
+      - "8083:8083"
+    networks:
+      - estoque_network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend_estoque
+    restart: unless-stopped
+    ports:
+      - "4200:80"
+    networks:
+      - estoque_network
+    depends_on:
+      - backend
+
 networks:
   estoque_network:
     driver: bridge
